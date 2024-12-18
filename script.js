@@ -8,6 +8,7 @@
        let currencyName = document.querySelector('#currencyName');
        let currencySymbol = document.querySelector('#currencySymbol');
        let countryFlag = document.querySelector('#countryFlag');
+       let countryContainer = document.querySelector('#countryInfo');
 
         //   console.log(countryName, region, area, population, currency, currencyName, currencySymbol, countryFlag);
           
@@ -17,7 +18,7 @@
        
        
        
-        // // Dark mode toggle
+        // Dark mode toggle
         // const darkModeToggle = document.getElementById('darkModeToggle');
         // const body = document.body;
 
@@ -38,18 +39,15 @@
             const data = await response.json();
             console.dir(data);
 
-            countryName.innerText = name[0].common;
-
-
-
-
-
-
-
-            
-            
-            
-            
+            countryName.innerText = data[0].name.common;
+            region.innerText = data[0].region;
+            area.innerText = data[0].area;
+            population.innerText = data[0].population;
+            currency.innerText = data[0].currencies[Object.keys(data[0].currencies)[0]].name;
+            currencyName.innerText = data[0].currencies[Object.keys(data[0].currencies)[0]].name;
+            currencySymbol.innerText = data[0].currencies[Object.keys(data[0].currencies)[0]].symbol;
+            countryFlag.src = data[0].flags.png;
+            countryContainer.className = "container mt-5";  
         }
         
         form.addEventListener('submit', fetchCountry);
